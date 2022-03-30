@@ -49,6 +49,15 @@ namespace DCYLabourAPI.Controllers
                 return new HttpRes<string>(10,"密码更改成功",null);
         }
 
-        
+        [HttpDelete]
+        [Route("{uid}")]
+        public HttpRes<string> DeleteUser(string uid)
+        {
+            int res = ubll.DeleteUser(uid);
+            if (res > 0)
+                return new HttpRes<string>(25, "删除用户成功", null);
+            else
+                return new HttpRes<string>(26,"删除用户失败，无此用户信息",null);
+        }
     }
 }

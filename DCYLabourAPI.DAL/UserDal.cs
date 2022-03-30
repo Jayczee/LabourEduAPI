@@ -44,6 +44,16 @@ namespace DCYLabourAPI.DAL
             return false;
         }
 
+        public int DeleteUser(string uid)
+        {
+            int sum = 0;
+            sum += SqlHelper.ExecuteNonQuery("delete from UserInf where Uid=@para1",
+                new SqlParameter("@para1",uid));
+            sum += SqlHelper.ExecuteNonQuery("delete from TeacherInf where TUid=@para1",
+                new SqlParameter("@para1",uid));
+            return sum;
+        }
+
         public int UserUpdate(User user)
         {
             DataTable dt = SqlHelper.ExecuteTable("select * from UserInf where Uid=@para1",

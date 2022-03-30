@@ -58,6 +58,30 @@ namespace DCYLabourAPI.DAL
                     new SqlParameter("@para1",uid));
         }
 
+        public int AddFinishInfo(int taskID)
+        {
+            object obj = SqlHelper.ExecuteScalar("select TaskCon from LabourTaskInf where TaskID=@para1",
+                new SqlParameter("@para1",taskID));
+            if ((int)obj == 0)
+            {
+                SqlHelper.ExecuteNonQuery("update LabourTaskInf set TaskCon=@para1 where TaskID=@para2",
+                    new SqlParameter("@para1", 1),
+                    new SqlParameter("@para2", taskID));
+                SqlHelper.ExecuteNonQuery("insert into TaskFinishInfo(TaskID)values(@para1)",
+                    new SqlParameter("@para1", taskID));
+                return (int)SqlHelper.ExecuteScalar("select TaskFinishID from TaskFinishInfo where TaskID=@para1",
+                    new SqlParameter("@para1", taskID));
+            }
+            else
+                return -1;
+        }
+
+        public DataTable GetFinishInfoByID(int taskID)
+        {
+            return SqlHelper.ExecuteTable("select * from TaskFinishInfo where TaskID = @para1",
+                new SqlParameter("@para1",taskID));
+        }
+
         public int DeleteTask(int taskID)
         {
             return SqlHelper.ExecuteNonQuery("delete from LabourTaskInf where taskID=@para1",
@@ -86,6 +110,55 @@ namespace DCYLabourAPI.DAL
                 new SqlParameter("@p17", tinf.CuoShiGuangZhao),
                 new SqlParameter("@p18", tinf.CuoShiPenSa),
                 new SqlParameter("@p19", tinf.ZuoWuCeLiang));
+        }
+
+        public int UpdateFinishInfo(UpdateTaskInf upinf)
+        {
+            string key="";
+            switch (upinf.Key)
+            {
+                case 0: key = "FanDiTime";break;
+                case 1: key = "ChuCao";  break;
+                case 2: key = "DiKuaiW";  break;
+                case 3: key = "DiKuaiH";  break;
+                case 4: key = "DiKuaiArea";  break;
+                case 5: key = "FanDiPicURL";  break;
+                case 6: key = "ZhengDiTime";  break;
+                case 7: key = "LongGui";  break;
+                case 8: key = "LongGou1";  break;
+                case 9: key = "LongGou2";  break;
+                case 10: key = "LongGou3";  break;
+                case 11: key = "LongGou4";  break;
+                case 12: key = "LongGou5";  break;
+                case 13: key = "CeLiangTime";  break;
+                case 14: key = "HuanJingTemp";  break;
+                case 15: key = "HuanJingWet";  break;
+                case 16: key = "TuRangTemp";  break;
+                case 17: key = "TuRangWet";  break;
+                case 18: key = "TuRangLight";  break;
+                case 19: key = "TuRangPH";  break;
+                case 20: key = "CeLiangPicURL";  break;
+                case 21: key = "CuoShiTime"; break;
+                case 22: key = "CuoShiShiFei";break;
+                case 23: key = "CuoShiShaChong"; break;
+                case 24: key = "CuoShiJiaoGuan"; break;
+                case 25: key = "CuoShiGuangZhao"; break;
+                case 26: key = "CuoShiMieChong"; break;
+                case 27: key = "CuoShiPenSa"; break;
+                case 28: key = "CuoShiPicURL";  break;
+                case 29: key = "ZuoWuTime";  break;
+                case 30: key = "ZuoWuJieDuan";  break;
+                case 31: key = "ZuoWuYanSe";  break;
+                case 32: key = "ZuoWuH";  break;
+                case 33: key = "ZuoWuNum1"; break;
+                case 34: key = "ZuoWuNum2"; break;
+                case 35: key = "ZuoWuShouHuo";  break;
+                case 36: key = "ZuoWuPicURL";  break;
+            }
+            string s = String.Format("update TaskFinishInfo set {0}=@para1 where TaskFinishID=@para2",key);
+            return SqlHelper.ExecuteNonQuery(s,
+                new SqlParameter("@para1",upinf.Value),
+                new SqlParameter("@para2",upinf.TaskFinishID));
         }
     }
 }

@@ -38,5 +38,10 @@ namespace DCYLabourAPI.BLL
         {
             return udal.UserUpdate(user);
         }
+
+        public int DeleteUser(string uid)
+        {
+            return udal.DeleteUser(uid);
+        }
     }
 }
