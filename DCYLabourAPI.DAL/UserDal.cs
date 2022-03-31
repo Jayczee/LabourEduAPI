@@ -44,6 +44,24 @@ namespace DCYLabourAPI.DAL
             return false;
         }
 
+        public DataTable GetTeacher(string uid)
+        {
+            return SqlHelper.ExecuteTable("select * from TeacherInf where TUid=@para1",
+                new SqlParameter("@para1",uid));
+        }
+
+        public DataTable GetClassByTUid(string uid)
+        {
+            object obj = SqlHelper.ExecuteScalar("select UserKind from UserInf where Uid=@para1",
+                new SqlParameter("@para1",uid));
+            int res = Convert.ToInt32(obj);
+            if (res == 0 || res == 1)
+                return SqlHelper.ExecuteTable("select * from ClassInf");
+            else
+                return SqlHelper.ExecuteTable("select * from ClassInf where CTUid=@para1",
+                    new SqlParameter("@para1",uid));
+        }
+
         public int DeleteUser(string uid)
         {
             int sum = 0;
@@ -52,6 +70,28 @@ namespace DCYLabourAPI.DAL
             sum += SqlHelper.ExecuteNonQuery("delete from TeacherInf where TUid=@para1",
                 new SqlParameter("@para1",uid));
             return sum;
+        }
+
+        public int UpdateClass(ClassInf inf)
+        {
+            return SqlHelper.ExecuteNonQuery("update ClassInf set CNo=@para1,CName=@para2,CTUid=@para3 where CID=@para4",
+                new SqlParameter("@para1",inf.CNo),
+                new SqlParameter("@para2",inf.CName),
+                new SqlParameter("@para3",inf.CTUid),
+                new SqlParameter("@para4",inf.CID));
+        }
+
+        public int AddClass(ClassInf inf)
+        {
+            DataTable dt = SqlHelper.ExecuteTable("select * from ClassInf where CNo=@para1 or CName =@para2",
+                new SqlParameter("@para1",inf.CNo),
+                new SqlParameter("@para2",inf.CName));
+            if (dt.Rows.Count > 0)
+                return 0;
+            return SqlHelper.ExecuteNonQuery("insert into ClassInf(CNo,CName,CTUid)",
+                new SqlParameter("@para1",inf.CNo),
+                new SqlParameter("@para2",inf.CName),
+                new SqlParameter("@para3",inf.CTUid));
         }
 
         public int UserUpdate(User user)

@@ -43,5 +43,53 @@ namespace DCYLabourAPI.BLL
         {
             return udal.DeleteUser(uid);
         }
+
+        public Teacher GetTeacher(string uid)
+        {
+            DataTable dt = udal.GetTeacher(uid);
+            if (dt.Rows.Count == 0)
+                return null;
+            else
+            {
+                Teacher t = new();
+                t.TeacherID = int.Parse(dt.Rows[0]["TeacherID"].ToString());
+                t.TUid = dt.Rows[0]["TUid"].ToString();
+                t.TCardNum = dt.Rows[0]["TCardNum"].ToString();
+                t.TPhoneNum = dt.Rows[0]["TPhoneNum"].ToString();
+                t.TSex = dt.Rows[0]["TSex"].ToString();
+                return t;
+            }
+        }
+
+        public List<ClassInf> GetClassByTUid(string uid)
+        {
+            DataTable dt = udal.GetClassByTUid(uid);
+            if (dt.Rows.Count == 0)
+                return null;
+            else
+            {
+                List<ClassInf> list = new List<ClassInf>();
+                for(int i = 0; i < dt.Rows.Count; i++)
+                {
+                    ClassInf inf = new();
+                    inf.CID = int.Parse(dt.Rows[i]["CID"].ToString());
+                    inf.CNo = int.Parse(dt.Rows[i]["CNo"].ToString());
+                    inf.CName = dt.Rows[i]["CName"].ToString();
+                    inf.CTUid=dt.Rows[i]["CTUid"].ToString() ;
+                    list.Add(inf);
+                }
+                return list;
+            }
+        }
+
+        public int AddClass(ClassInf inf)
+        {
+            return udal.AddClass(inf);
+        }
+
+        public int UpdateClass(ClassInf inf)
+        {
+            return udal.UpdateClass(inf);
+        }
     }
 }
