@@ -68,7 +68,7 @@ namespace DCYLabourAPI.Controllers
             if (t == null)
                 return new HttpRes<Teacher>(27, "获取失败，无该教师信息", null);
             else
-                return new HttpRes<Teacher>(28,"获取教师信息成功",t);
+                return new HttpRes<Teacher>(28, "获取教师信息成功", t);
         }
 
         [HttpGet]
@@ -84,23 +84,46 @@ namespace DCYLabourAPI.Controllers
         }
 
         [HttpPost]
-        public HttpRes<string> AddClass([FromBody]ClassInf inf)
+        public HttpRes<string> AddClass([FromBody] ClassInf inf)
         {
             int res = ubll.AddClass(inf);
             if (res > 0)
                 return new HttpRes<string>(31, "添加班级信息成功", null);
             else
-                return new HttpRes<string>(32,"添加班级信息失败，班级信息已存在",null);
+                return new HttpRes<string>(32, "添加班级信息失败，班级信息已存在", null);
         }
 
         [HttpPut]
-        public HttpRes<string> UpdateClass([FromBody]ClassInf inf)
+        public HttpRes<string> UpdateClass([FromBody] ClassInf inf)
         {
             int res = ubll.UpdateClass(inf);
             if (res > 0)
                 return new HttpRes<string>(33, "更新班级信息成功", null);
             else
-                return new HttpRes<string>(33, "更新班级信息失败,无此班级信息", null);
+                return new HttpRes<string>(34, "更新班级信息失败,无此班级信息", null);
         }
+
+
+        [HttpDelete]
+        [Route("{cid}")]
+        public HttpRes<string> DeleteClass(int cid)
+        {
+            int res = ubll.DeleteClass(cid);
+            if (res > 0)
+                return new HttpRes<string>(35, "删除班级信息成功", null);
+            else
+                return new HttpRes<string>(36,"删除班级信息失败，无此班级信息",null);
+        }
+
+        [HttpGet]
+        public HttpRes<List<Teacher>> GetAllTeacher()
+        {
+            List<Teacher> list = ubll.GetAllTeacher();
+            if (list == null)
+                return new HttpRes<List<Teacher>>(41, "无教师信息", null);
+            else
+                return new HttpRes<List<Teacher>>(42,"获取教师信息成功",list);
+
+        }                                       
     }
 }

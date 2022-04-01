@@ -81,6 +81,17 @@ namespace DCYLabourAPI.DAL
                 new SqlParameter("@para4",inf.CID));
         }
 
+        public DataTable GetAllTeacher()
+        {
+            return SqlHelper.ExecuteTable("select * from TeacherInf");
+        }
+
+        public int DeleteUser(int cid)
+        {
+            return SqlHelper.ExecuteNonQuery("delete from ClassInf where CID=@para1",
+                new SqlParameter("@para1",cid));
+        }
+
         public int AddClass(ClassInf inf)
         {
             DataTable dt = SqlHelper.ExecuteTable("select * from ClassInf where CNo=@para1 or CName =@para2",

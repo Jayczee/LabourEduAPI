@@ -41,5 +41,20 @@ namespace DCYLabourAPI.BLL
             }
             return list;
         }
+
+        public int UpdateStu(Student s)
+        {
+            return sdal.UpdateStu(s);
+        }
+
+        public int AddStu(Student s)
+        {
+            return sdal.AddStu(s);
+        }
+
+        public int DeleteStu(int sid)
+        {
+            return sdal.DeleteStu(sid);
+        }
     }
 }

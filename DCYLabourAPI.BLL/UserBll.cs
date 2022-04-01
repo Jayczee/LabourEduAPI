@@ -91,5 +91,34 @@ namespace DCYLabourAPI.BLL
         {
             return udal.UpdateClass(inf);
         }
-    }
+
+        public int DeleteClass(int cid)
+        {
+            return udal.DeleteUser(cid);
+        }
+
+        public List<Teacher> GetAllTeacher()
+        {
+            DataTable dt = udal.GetAllTeacher();
+            if (dt.Rows.Count == 0)
+                return null;
+            else
+            {
+                List<Teacher> list = new();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Teacher t = new();
+                    t.TeacherID = int.Parse(dt.Rows[i]["TeacherID"].ToString());
+                    t.Tname = dt.Rows[i]["TName"].ToString();
+                    t.TUid = dt.Rows[i]["TUid"].ToString();
+                    t.TBirth = dt.Rows[i]["TBirth"].ToString();
+                    t.TCardNum = dt.Rows[i]["TCardNum"].ToString();
+                    t.TPhoneNum = dt.Rows[i]["TPhoneNum"].ToString();
+                    t.TSex = dt.Rows[i]["TSex"].ToString();
+                    list.Add(t);
+                }
+                return list;
+            }
+        }
+    }   
 }

@@ -117,6 +117,7 @@ namespace DCYLabourAPI.BLL
             }
         }
 
+     
         public int UpdateFinishInfo(UpdateTaskInf upinf)
         {
             return tdal.UpdateFinishInfo(upinf);

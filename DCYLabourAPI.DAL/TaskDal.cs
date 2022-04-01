@@ -160,5 +160,7 @@ namespace DCYLabourAPI.DAL
                 new SqlParameter("@para1",upinf.Value),
                 new SqlParameter("@para2",upinf.TaskFinishID));
         }
+
+       
     }
 }

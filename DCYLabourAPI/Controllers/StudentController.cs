@@ -31,5 +31,42 @@ namespace DCYLabourAPI.Controllers
             else
                 return new HttpRes<List<Student>>(5, "查询成功", list);
         }
+
+        [HttpPost]
+        public HttpRes<Student> AddStu([FromBody]Student s)
+        {
+            int res = sbll.AddStu(s);
+            if (res > 0)
+            {
+                s.SID = res;
+                return new HttpRes<Student>(37,"添加学生信息成功",s);
+            }
+            else
+            {
+                return new HttpRes<Student>(38, "添加学生信息失败，卡号已存在", null);
+            }
+        }
+
+        [HttpPut]
+        public HttpRes<string> UpdateStu([FromBody]Student s)
+        {
+            int res = sbll.UpdateStu(s);
+            if (res > 0)
+                return new HttpRes<string>(39, "更新学生信息成功", null);
+            else
+                return new HttpRes<string>(40,"更新学生信息失败，该卡号已存在或学生信息已被删除",null);
+        }
+
+        [HttpDelete]
+        [Route("{sid}")]
+        public HttpRes<string> DeleteStu(int sid)
+        {
+            int res = sbll.DeleteStu(sid);
+            if (res > 0)
+                return new HttpRes<string>(41, "删除学生信息成功", null);
+            else
+                return new HttpRes<string>(42,"删除学生信息失败，该学生信息不存在",null);
+        }
+
     }
 }
