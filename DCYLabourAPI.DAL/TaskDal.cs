@@ -154,6 +154,7 @@ namespace DCYLabourAPI.DAL
                 case 34: key = "ZuoWuNum2"; break;
                 case 35: key = "ZuoWuShouHuo";  break;
                 case 36: key = "ZuoWuPicURL";  break;
+                case 37:key = "ZhengDiPicURL";break;
             }
             string s = String.Format("update TaskFinishInfo set {0}=@para1 where TaskFinishID=@para2",key);
             return SqlHelper.ExecuteNonQuery(s,

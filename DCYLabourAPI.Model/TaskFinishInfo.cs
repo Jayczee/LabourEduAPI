@@ -23,6 +23,7 @@ namespace DCYLabourAPI.Model
         private string _longGou3 = "";
         private string _longGou4 = "";
         private string _longGou5 = "";
+        private string _zhengDiPicURL = "";
         private string _ceLiangTime = "";
         private string _huanJingTemp = "";
         private string _huanJingWet = "";
@@ -63,6 +64,7 @@ namespace DCYLabourAPI.Model
         public string LongGou3 { get => _longGou3; set => _longGou3 = value; }
         public string LongGou4 { get => _longGou4; set => _longGou4 = value; }
         public string LongGou5 { get => _longGou5; set => _longGou5 = value; }
+
         public string CeLiangTime { get => _ceLiangTime; set => _ceLiangTime = value; }
         public string HuanJingTemp { get => _huanJingTemp; set => _huanJingTemp = value; }
         public string HuanJingWet { get => _huanJingWet; set => _huanJingWet = value; }
@@ -87,5 +89,6 @@ namespace DCYLabourAPI.Model
         public int ZuoWuNum2 { get => _zuoWunUM2; set => _zuoWunUM2 = value; }
         public string ZuoWuShouHuo { get => _zuoWuShouHuo; set => _zuoWuShouHuo = value; }
         public string ZuoWuPicURL { get => _zuoWuPicURL; set => _zuoWuPicURL = value; }
+        public string ZhengDiPicURL { get => _zhengDiPicURL; set => _zhengDiPicURL = value; }
     }
 }

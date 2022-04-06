@@ -87,6 +87,7 @@ namespace DCYLabourAPI.BLL
                     tfinf.LongGou3 = dt.Rows[i]["LongGou3"].ToString();
                     tfinf.LongGou4 = dt.Rows[i]["LongGou4"].ToString();
                     tfinf.LongGou5 = dt.Rows[i]["LongGou5"].ToString();
+                    tfinf.ZhengDiPicURL = dt.Rows[i]["ZhengDiPicURL"].ToString();
                     tfinf.CeLiangTime = dt.Rows[i]["CeLiangTime"].ToString();
                     tfinf.HuanJingTemp = dt.Rows[i]["HuanJingTemp"].ToString();
                     tfinf.HuanJingWet = dt.Rows[i]["HuanJingWet"].ToString();
