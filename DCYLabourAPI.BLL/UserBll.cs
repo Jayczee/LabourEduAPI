@@ -52,6 +52,7 @@ namespace DCYLabourAPI.BLL
             else
             {
                 Teacher t = new();
+                t.Tname = dt.Rows[0]["TName"].ToString();
                 t.TeacherID = int.Parse(dt.Rows[0]["TeacherID"].ToString());
                 t.TUid = dt.Rows[0]["TUid"].ToString();
                 t.TCardNum = dt.Rows[0]["TCardNum"].ToString();

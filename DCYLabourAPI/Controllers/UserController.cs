@@ -124,6 +124,6 @@ namespace DCYLabourAPI.Controllers
             else
                 return new HttpRes<List<Teacher>>(42,"获取教师信息成功",list);
 
-        }                                       
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using System.Xml;
+using Microsoft.Data.SqlClient;
 
 namespace DCYLabourAPI.DAL
 {

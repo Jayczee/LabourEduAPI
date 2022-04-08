@@ -18,7 +18,6 @@ namespace DCYLabourAPI.Controllers
             tinf.TaskID = taskid;
             return new HttpRes<TaskInfo>(11, "添加劳动任务成功", tinf);
         }
-
         [HttpGet]
         [Route("{uid}/{userkind}")]
         public HttpRes<List<TaskInfo>> GetTaskByTUid(string uid, int userkind)
