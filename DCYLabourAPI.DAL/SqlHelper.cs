@@ -12,7 +12,7 @@ namespace DCYLabourAPI.DAL
 {
     public class SqlHelper
     {
-        public static string ConnectionString { get; set; } = "server=124.222.114.100;database=LabourEdu;uid=sa;pwd=jhkd5960795.";
+        public static string ConnectionString { get; set; } = "server=124.222.114.100;database=LabourEdu;uid=sa;pwd=jhkd5960795.;Encrypt=True;TrustServerCertificate=True;";
 
 
         public static DataTable ExecuteTable(string cmdText, params SqlParameter[] sqlParameters)

@@ -48,6 +48,7 @@ namespace DCYLabourAPI.Model
         private int _zuoWunUM2 = 0;
         private string _zuoWuShouHuo = "";
         private string _zuoWuPicURL = "";
+        private string _stuPresent = "";
 
         public int TaskFinishID { get => _taskFinishID; set => _taskFinishID = value; }
         public int TaskID { get => _taskID; set => _taskID = value; }
@@ -90,5 +91,6 @@ namespace DCYLabourAPI.Model
         public string ZuoWuShouHuo { get => _zuoWuShouHuo; set => _zuoWuShouHuo = value; }
         public string ZuoWuPicURL { get => _zuoWuPicURL; set => _zuoWuPicURL = value; }
         public string ZhengDiPicURL { get => _zhengDiPicURL; set => _zhengDiPicURL = value; }
+        public string StuPresent { get => _stuPresent; set => _stuPresent = value; }
     }
 }

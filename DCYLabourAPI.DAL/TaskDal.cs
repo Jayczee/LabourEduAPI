@@ -90,7 +90,7 @@ namespace DCYLabourAPI.DAL
 
         public int UpdateTask(TaskInfo tinf)
         {
-            return SqlHelper.ExecuteNonQuery("update LabourTaskInf set TaskName=@p1,TaskStartTime=@p2,TaskTUid=@p3,TaskClass=@p4,TaskGroup=@p5,TaskStuCapID=@p6,TaskStus=@p7,TaskDetail=@p8,Fandi=@p9,Zhengdi=@p10,Celiang=@p11,CuoShi=@p12,CuoShiShiFei=@p13,CuoShiShaChong=@p14,CuoShiJiaoGuan=@p15,CuoShiMieChong=@p16,CuoShiGuangZhao=@p17,CuoShiPenSa=@p18,ZuoWuCeLiang=@p19",
+            return SqlHelper.ExecuteNonQuery("update LabourTaskInf set TaskName=@p1,TaskStartTime=@p2,TaskTUid=@p3,TaskClass=@p4,TaskGroup=@p5,TaskStuCapID=@p6,TaskStus=@p7,TaskDetail=@p8,Fandi=@p9,Zhengdi=@p10,Celiang=@p11,CuoShi=@p12,CuoShiShiFei=@p13,CuoShiShaChong=@p14,CuoShiJiaoGuan=@p15,CuoShiMieChong=@p16,CuoShiGuangZhao=@p17,CuoShiPenSa=@p18,ZuoWuCeLiang=@p19 where TaskID=@p20",
                 new SqlParameter("@p1", tinf.TaskName),
                 new SqlParameter("@p2", tinf.TaskStartTime),
                 new SqlParameter("@p3", tinf.TaskTUid),
@@ -109,7 +109,8 @@ namespace DCYLabourAPI.DAL
                 new SqlParameter("@p16", tinf.CuoShiMieChong),
                 new SqlParameter("@p17", tinf.CuoShiGuangZhao),
                 new SqlParameter("@p18", tinf.CuoShiPenSa),
-                new SqlParameter("@p19", tinf.ZuoWuCeLiang));
+                new SqlParameter("@p19", tinf.ZuoWuCeLiang),
+                new SqlParameter("@p20",tinf.TaskID));
         }
 
         public int UpdateFinishInfo(UpdateTaskInf upinf)
@@ -155,6 +156,7 @@ namespace DCYLabourAPI.DAL
                 case 35: key = "ZuoWuShouHuo";  break;
                 case 36: key = "ZuoWuPicURL";  break;
                 case 37:key = "ZhengDiPicURL";break;
+                case 38:key = "StuPresent";break;
             }
             string s = String.Format("update TaskFinishInfo set {0}=@para1 where TaskFinishID=@para2",key);
             return SqlHelper.ExecuteNonQuery(s,

@@ -51,12 +51,12 @@ namespace DCYLabourAPI.Controllers
 
         [HttpGet]
         [Route("{taskID}")]
-        public HttpRes<List<TaskFinishInfo>> GetFinishInfoByID(int taskID) {
-            List<TaskFinishInfo> list = tbll.GetFinishInfoByID(taskID);
+        public HttpRes<TaskFinishInfo> GetFinishInfoByID(int taskID) {
+            TaskFinishInfo list = tbll.GetFinishInfoByID(taskID);
             if (list == null)
-                return new HttpRes<List<TaskFinishInfo>>(18, "无任务完成进度信息", null);
+                return new HttpRes<TaskFinishInfo>(18, "无任务完成进度信息", null);
             else
-                return new HttpRes<List<TaskFinishInfo>>(19, "查询任务完成进度信息成功", list);
+                return new HttpRes<TaskFinishInfo>(19, "查询任务完成进度信息成功", list);
         }
 
         [HttpPost]
@@ -73,7 +73,7 @@ namespace DCYLabourAPI.Controllers
         [HttpPut]
         public HttpRes<string> UpdateFinishInfo([FromBody]UpdateTaskInf upinf)
         {
-            if(upinf.Key<0 || upinf.Key>36)
+            if(upinf.Key<0 || upinf.Key>38)
                 return new HttpRes<string>(22, "修改项错误，无此修改项", null);
             int res = tbll.UpdateFinishInfo(upinf);
             if (res > 0)

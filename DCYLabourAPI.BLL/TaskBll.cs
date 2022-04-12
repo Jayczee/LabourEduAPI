@@ -61,60 +61,56 @@ namespace DCYLabourAPI.BLL
             return tdal.AddFinishInfo(taskID);
         }
 
-        public List<TaskFinishInfo> GetFinishInfoByID(int taskID)
+        public TaskFinishInfo GetFinishInfoByID(int taskID)
         {
             DataTable dt = tdal.GetFinishInfoByID(taskID);
             if (dt.Rows.Count == 0)
                 return null;
             else
             {
-                List<TaskFinishInfo> list = new();
-                for(int i = 0; i < dt.Rows.Count; i++)
-                {
-                    TaskFinishInfo tfinf = new TaskFinishInfo();
-                    tfinf.TaskFinishID = int.Parse(dt.Rows[i]["TaskFinishID"].ToString());
-                    tfinf.TaskID = int.Parse(dt.Rows[i]["TaskID"].ToString());
-                    tfinf.FanDiTime = dt.Rows[i]["FanDiTime"].ToString();
-                    tfinf.ChuCao = dt.Rows[i]["ChuCao"].ToString();
-                    tfinf.DiKuaiW = dt.Rows[i]["DiKuaiW"].ToString();
-                    tfinf.DiKuaiH = dt.Rows[i]["DiKuaiH"].ToString();
-                    tfinf.DiKuaiArea = dt.Rows[i]["DiKuaiArea"].ToString();
-                    tfinf.FanDiPicURL= dt.Rows[i]["FanDiPicURL"].ToString();
-                    tfinf.ZhengDiTime = dt.Rows[i]["ZhengDiTime"].ToString();
-                    tfinf.LongGui = dt.Rows[i]["LongGui"].ToString();
-                    tfinf.LongGou1 = dt.Rows[i]["LongGou1"].ToString();
-                    tfinf.LongGou2 = dt.Rows[i]["LongGou2"].ToString();
-                    tfinf.LongGou3 = dt.Rows[i]["LongGou3"].ToString();
-                    tfinf.LongGou4 = dt.Rows[i]["LongGou4"].ToString();
-                    tfinf.LongGou5 = dt.Rows[i]["LongGou5"].ToString();
-                    tfinf.ZhengDiPicURL = dt.Rows[i]["ZhengDiPicURL"].ToString();
-                    tfinf.CeLiangTime = dt.Rows[i]["CeLiangTime"].ToString();
-                    tfinf.HuanJingTemp = dt.Rows[i]["HuanJingTemp"].ToString();
-                    tfinf.HuanJingWet = dt.Rows[i]["HuanJingWet"].ToString();
-                    tfinf.TuRangTemp = dt.Rows[i]["TuRangTemp"].ToString();
-                    tfinf.TuRangWet = dt.Rows[i]["TuRangWet"].ToString();
-                    tfinf.TuRangLight = dt.Rows[i]["TuRangLight"].ToString();
-                    tfinf.TuRangPH = dt.Rows[i]["TuRangPH"].ToString();
-                    tfinf.CeLiangPicURL = dt.Rows[i]["CeLiangPicURL"].ToString();
-                    tfinf.CuoShiTime = dt.Rows[i]["CuoShiTime"].ToString();
-                    tfinf.CuoShiShiFei = float.Parse(dt.Rows[i]["CuoShiShiFei"].ToString()==""?"0": dt.Rows[i]["CuoShiShiFei"].ToString());
-                    tfinf.CuoShiShaChong = float.Parse(dt.Rows[i]["CuoShiShaChong"].ToString() == "" ? "0" : dt.Rows[i]["CuoShiShaChong"].ToString());
-                    tfinf.CuoShiJiaoGuan = int.Parse(dt.Rows[i]["CuoShiJiaoGuan"].ToString() == "" ? "0" : dt.Rows[i]["CuoShiJiaoGuan"].ToString());
-                    tfinf.CuoShiGuangZhao = int.Parse(dt.Rows[i]["CuoShiGuangZhao"].ToString() == "" ? "0" : dt.Rows[i]["CuoShiGuangZhao"].ToString());
-                    tfinf.CuoShiMieChong = int.Parse(dt.Rows[i]["CuoShiMieChong"].ToString() == "" ? "0" : dt.Rows[i]["CuoShiMieChong"].ToString());
-                    tfinf.CuoShiPenSa = int.Parse(dt.Rows[i]["CuoShiPenSa"].ToString() == "" ? "0" : dt.Rows[i]["CuoShiPenSa"].ToString());
-                    tfinf.CuoShiPicURL = dt.Rows[i]["CuoShiPicURL"].ToString();
-                    tfinf.ZuoWuTime = dt.Rows[i]["ZuoWuTime"].ToString();
-                    tfinf.ZuoWuJieDuan = dt.Rows[i]["ZuoWuJieDuan"].ToString();
-                    tfinf.ZuoWuYanSe = dt.Rows[i]["ZuoWuYanSe"].ToString();
-                    tfinf.ZuoWuH = dt.Rows[i]["ZuoWuH"].ToString();
-                    tfinf.ZuoWuNum1 = int.Parse(dt.Rows[i]["ZuoWuNum1"].ToString() == "" ? "0" : dt.Rows[i]["ZuoWuNum1"].ToString());
-                    tfinf.ZuoWuNum2 = int.Parse(dt.Rows[i]["ZuoWuNum2"].ToString() == "" ? "0" : dt.Rows[i]["ZuoWuNum2"].ToString());
-                    tfinf.ZuoWuShouHuo = dt.Rows[i]["ZuoWuShouHuo"].ToString();
-                    tfinf.ZuoWuPicURL = dt.Rows[i]["ZuoWuPicURL"].ToString();
-                    list.Add(tfinf);
-                }
-                return list;
+                TaskFinishInfo tfinf = new TaskFinishInfo();
+                tfinf.TaskFinishID = int.Parse(dt.Rows[0]["TaskFinishID"].ToString());
+                tfinf.TaskID = int.Parse(dt.Rows[0]["TaskID"].ToString());
+                tfinf.FanDiTime = dt.Rows[0]["FanDiTime"].ToString();
+                tfinf.ChuCao = dt.Rows[0]["ChuCao"].ToString();
+                tfinf.DiKuaiW = dt.Rows[0]["DiKuaiW"].ToString();
+                tfinf.DiKuaiH = dt.Rows[0]["DiKuaiH"].ToString();
+                tfinf.DiKuaiArea = dt.Rows[0]["DiKuaiArea"].ToString();
+                tfinf.FanDiPicURL = dt.Rows[0]["FanDiPicURL"].ToString();
+                tfinf.ZhengDiTime = dt.Rows[0]["ZhengDiTime"].ToString();
+                tfinf.LongGui = dt.Rows[0]["LongGui"].ToString();
+                tfinf.LongGou1 = dt.Rows[0]["LongGou1"].ToString();
+                tfinf.LongGou2 = dt.Rows[0]["LongGou2"].ToString();
+                tfinf.LongGou3 = dt.Rows[0]["LongGou3"].ToString();
+                tfinf.LongGou4 = dt.Rows[0]["LongGou4"].ToString();
+                tfinf.LongGou5 = dt.Rows[0]["LongGou5"].ToString();
+                tfinf.ZhengDiPicURL = dt.Rows[0]["ZhengDiPicURL"].ToString();
+                tfinf.CeLiangTime = dt.Rows[0]["CeLiangTime"].ToString();
+                tfinf.HuanJingTemp = dt.Rows[0]["HuanJingTemp"].ToString();
+                tfinf.HuanJingWet = dt.Rows[0]["HuanJingWet"].ToString();
+                tfinf.TuRangTemp = dt.Rows[0]["TuRangTemp"].ToString();
+                tfinf.TuRangWet = dt.Rows[0]["TuRangWet"].ToString();
+                tfinf.TuRangLight = dt.Rows[0]["TuRangLight"].ToString();
+                tfinf.TuRangPH = dt.Rows[0]["TuRangPH"].ToString();
+                tfinf.CeLiangPicURL = dt.Rows[0]["CeLiangPicURL"].ToString();
+                tfinf.CuoShiTime = dt.Rows[0]["CuoShiTime"].ToString();
+                tfinf.CuoShiShiFei = float.Parse(dt.Rows[0]["CuoShiShiFei"].ToString() == "" ? "0" : dt.Rows[0]["CuoShiShiFei"].ToString());
+                tfinf.CuoShiShaChong = float.Parse(dt.Rows[0]["CuoShiShaChong"].ToString() == "" ? "0" : dt.Rows[0]["CuoShiShaChong"].ToString());
+                tfinf.CuoShiJiaoGuan = int.Parse(dt.Rows[0]["CuoShiJiaoGuan"].ToString() == "" ? "0" : dt.Rows[0]["CuoShiJiaoGuan"].ToString());
+                tfinf.CuoShiGuangZhao = int.Parse(dt.Rows[0]["CuoShiGuangZhao"].ToString() == "" ? "0" : dt.Rows[0]["CuoShiGuangZhao"].ToString());
+                tfinf.CuoShiMieChong = int.Parse(dt.Rows[0]["CuoShiMieChong"].ToString() == "" ? "0" : dt.Rows[0]["CuoShiMieChong"].ToString());
+                tfinf.CuoShiPenSa = int.Parse(dt.Rows[0]["CuoShiPenSa"].ToString() == "" ? "0" : dt.Rows[0]["CuoShiPenSa"].ToString());
+                tfinf.CuoShiPicURL = dt.Rows[0]["CuoShiPicURL"].ToString();
+                tfinf.ZuoWuTime = dt.Rows[0]["ZuoWuTime"].ToString();
+                tfinf.ZuoWuJieDuan = dt.Rows[0]["ZuoWuJieDuan"].ToString();
+                tfinf.ZuoWuYanSe = dt.Rows[0]["ZuoWuYanSe"].ToString();
+                tfinf.ZuoWuH = dt.Rows[0]["ZuoWuH"].ToString();
+                tfinf.ZuoWuNum1 = int.Parse(dt.Rows[0]["ZuoWuNum1"].ToString() == "" ? "0" : dt.Rows[0]["ZuoWuNum1"].ToString());
+                tfinf.ZuoWuNum2 = int.Parse(dt.Rows[0]["ZuoWuNum2"].ToString() == "" ? "0" : dt.Rows[0]["ZuoWuNum2"].ToString());
+                tfinf.ZuoWuShouHuo = dt.Rows[0]["ZuoWuShouHuo"].ToString();
+                tfinf.ZuoWuPicURL = dt.Rows[0]["ZuoWuPicURL"].ToString();
+                tfinf.StuPresent = dt.Rows[0]["StuPresent"].ToString();
+                return tfinf;
             }
         }
 
