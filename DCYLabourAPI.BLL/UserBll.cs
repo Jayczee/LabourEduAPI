@@ -121,5 +121,15 @@ namespace DCYLabourAPI.BLL
                 return list;
             }
         }
+
+        public int GetUserKind(string uid)
+        {
+            return udal.GetUserKind(uid);
+        }
+
+        public int ResetPwd(string uid)
+        {
+            return udal.ResetPwd(uid);
+        }
     }   
 }

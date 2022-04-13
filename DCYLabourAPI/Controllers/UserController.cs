@@ -80,7 +80,8 @@ namespace DCYLabourAPI.Controllers
             if (list == null)
             {
                 return new HttpRes<List<ClassInf>>(29, "无班级信息", null);
-            } else
+            }
+            else
                 return new HttpRes<List<ClassInf>>(30, "获取班级信息成功", list);
         }
 
@@ -113,7 +114,7 @@ namespace DCYLabourAPI.Controllers
             if (res > 0)
                 return new HttpRes<string>(35, "删除班级信息成功", null);
             else
-                return new HttpRes<string>(36,"删除班级信息失败，无此班级信息",null);
+                return new HttpRes<string>(36, "删除班级信息失败，无此班级信息", null);
         }
 
         [HttpGet]
@@ -123,7 +124,29 @@ namespace DCYLabourAPI.Controllers
             if (list == null)
                 return new HttpRes<List<Teacher>>(41, "无教师信息", null);
             else
-                return new HttpRes<List<Teacher>>(42,"获取教师信息成功",list);
+                return new HttpRes<List<Teacher>>(42, "获取教师信息成功", list);
+        }
+
+        [HttpGet]
+        [Route("{uid}")]
+        public HttpRes<int> GetUserKind(string uid)
+        {
+            int userkind = ubll.GetUserKind(uid);
+            if (userkind != -1)
+                return new HttpRes<int>(43, "查询成功", userkind);
+            else
+                return new HttpRes<int>(44, "无信息", -1);
+        }
+
+        [HttpGet]
+        [Route("{uid}")]
+        public HttpRes<string> ResetPwd(string uid)
+        {
+            int res = ubll.ResetPwd(uid);
+            if (res > 0)
+                return new HttpRes<string>(45, "重置密码成功", null);
+            else
+                return new HttpRes<string>(44, "无该用户信息，重置密码失败", null);
 
         }
     }

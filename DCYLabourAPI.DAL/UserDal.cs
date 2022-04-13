@@ -105,6 +105,22 @@ namespace DCYLabourAPI.DAL
                 new SqlParameter("@para3",inf.CTUid));
         }
 
+        public int ResetPwd(string uid)
+        {
+            return SqlHelper.ExecuteNonQuery("update UserInf set Pwd='123456' where Uid=@para1",
+                new SqlParameter("@para1",uid));
+        }
+
+        public int GetUserKind(string uid)
+        {
+            object obj = SqlHelper.ExecuteScalar("select UserKind from UserInf where Uid=@para1",
+                new SqlParameter("@para1",uid));
+            if (obj == null)
+                return -1;
+            else
+                return int.Parse(obj.ToString());
+        }
+
         public int UserUpdate(User user)
         {
             DataTable dt = SqlHelper.ExecuteTable("select * from UserInf where Uid=@para1",
