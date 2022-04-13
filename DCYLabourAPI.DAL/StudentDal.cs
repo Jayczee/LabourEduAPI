@@ -33,22 +33,29 @@ namespace DCYLabourAPI.DAL
                     return 0;
                 else
                 {
-                    return SqlHelper.ExecuteNonQuery("insert into Student(SName,SSex,SCardNum,SCNo,SYear)values(@p1,@p2,@p3,@p4,@p5)",
+                    SqlHelper.ExecuteNonQuery("insert into Student(SName,SSex,SCardNum,SCNo,SYear)values(@p1,@p2,@p3,@p4,@p5)",
                         new SqlParameter("@p1",s.SName),
                         new SqlParameter("@p2",s.SSex),
                         new SqlParameter("@p3",s.SCardNum),
                         new SqlParameter("@p4",s.SCNo),
                         new SqlParameter("@p5",s.SYear));
+                    return int.Parse(SqlHelper.ExecuteScalar("select SID from student where SCardNum = @para1",
+                        new SqlParameter("@para1",s.SCardNum)).ToString());
                 }
             }
             else
             {
-                return SqlHelper.ExecuteNonQuery("insert into Student(SName,SSex,SCardNum,SCNo,SYear)values(@p1,@p2,@p3,@p4,@p5)",
+                SqlHelper.ExecuteNonQuery("insert into Student(SName,SSex,SCardNum,SCNo,SYear)values(@p1,@p2,@p3,@p4,@p5)",
                         new SqlParameter("@p1", s.SName),
                         new SqlParameter("@p2", s.SSex),
                         new SqlParameter("@p3", s.SCardNum),
                         new SqlParameter("@p4", s.SCNo),
                         new SqlParameter("@p5", s.SYear));
+                return int.Parse(SqlHelper.ExecuteScalar("select SID from student where SName = @para1 and SSex=@para2 and SCNo =@para3 and SYear=@para4",
+                    new SqlParameter("@para1", s.SCardNum),
+                    new SqlParameter("@para2",s.SSex),
+                    new SqlParameter("@para3",s.SCNo),
+                    new SqlParameter("@para4",s.SYear)).ToString());
             }
         }
 
@@ -67,12 +74,13 @@ namespace DCYLabourAPI.DAL
                 return 0;
             }
             else
-                return SqlHelper.ExecuteNonQuery("update Student set SName=@para1,SSex=@para2,SCardNum=@para3,SCNo=@para4 and SYear=@para5",
+                return SqlHelper.ExecuteNonQuery("update Student set SName=@para1,SSex=@para2,SCardNum=@para3,SCNo=@para4,SYear=@para5 where SID=@para6",
                     new SqlParameter("@para1",s.SName),
                     new SqlParameter("@para2",s.SSex),
                     new SqlParameter("@para3",s.SCardNum),
                     new SqlParameter("@para4",s.SCNo),
-                    new SqlParameter("@para5",s.SYear));
+                    new SqlParameter("@para5",s.SYear),
+                    new SqlParameter("@para6",s.SID));
         }
     }
 }
