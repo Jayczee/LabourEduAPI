@@ -27,7 +27,7 @@ namespace DCYLabourAPI.DAL
             return false;
         }
 
-        public bool UserReg(UserRegInf regInf)
+        public int UserReg(UserRegInf regInf)
         {
             int res = SqlHelper.ExecuteNonQuery("insert into UserInf(Uid,Pwd,UserKind)values(@para1,@para2,@para3)",
                 new SqlParameter("@para1",regInf.Uid),
@@ -39,9 +39,11 @@ namespace DCYLabourAPI.DAL
                 new SqlParameter("@para3", regInf.TBirth),
                 new SqlParameter("@para4", regInf.TPhoneNum),
                 new SqlParameter("@para5", regInf.TSex));
+            int id = int.Parse(SqlHelper.ExecuteScalar("select TeacherID from TeacherInf where uid=@para1",
+                new SqlParameter("@para1", regInf.Uid)).ToString());
             if (res > 0 && res2 > 0)
-                return true;
-            return false;
+                return id;
+            return -1;
         }
 
         public DataTable GetTeacher(string uid)
@@ -103,6 +105,13 @@ namespace DCYLabourAPI.DAL
                 new SqlParameter("@para1",inf.CNo),
                 new SqlParameter("@para2",inf.CName),
                 new SqlParameter("@para3",inf.CTUid));
+        }
+
+        public int UpdateCard(string uid, string card)
+        {
+            return SqlHelper.ExecuteNonQuery("update TeacherInf set TCardNum=@para1 where TUid=@para2",
+                new SqlParameter("@para1",card),
+                new SqlParameter("@para2",uid)) ;
         }
 
         public int ResetPwd(string uid)

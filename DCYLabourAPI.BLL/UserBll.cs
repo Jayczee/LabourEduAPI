@@ -29,9 +29,10 @@ namespace DCYLabourAPI.BLL
         {
             if (udal.CheckUser(regInf.Uid))
                 return 0;
-            if (udal.UserReg(regInf))
-                return 1;
-            return 2;
+            int id;
+            if ((id = udal.UserReg(regInf)) !=-1)
+                return id;
+            return -1;
         }
 
         public int UserUpdate(User user)
@@ -130,6 +131,11 @@ namespace DCYLabourAPI.BLL
         public int ResetPwd(string uid)
         {
             return udal.ResetPwd(uid);
+        }
+
+        public int UpdateCard(string uid, string card)
+        {
+            return udal.UpdateCard(uid, card);
         }
     }   
 }

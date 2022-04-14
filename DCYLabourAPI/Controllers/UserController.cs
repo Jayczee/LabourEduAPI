@@ -34,8 +34,8 @@ namespace DCYLabourAPI.Controllers
             switch (res)
             {
                 case 0: return new HttpRes<string>(6, "注册失败，uid已存在", null);
-                case 1: return new HttpRes<string>(7, "注册成功", null);
-                case 2: return new HttpRes<string>(8, "注册失败，未知错误", null);
+                default: return new HttpRes<string>(7, "注册成功", res.ToString());
+                case -1: return new HttpRes<string>(8, "注册失败，未知错误", null);
             }
             return new HttpRes<string>(8, "注册失败，未知错误", null);
         }
@@ -148,6 +148,17 @@ namespace DCYLabourAPI.Controllers
             else
                 return new HttpRes<string>(44, "无该用户信息，重置密码失败", null);
 
+        }
+
+        [HttpPut]
+        [Route("{uid}/{card}")]
+        public HttpRes<string> UpdateCard(string uid,string card)
+        {
+            int res = ubll.UpdateCard(uid, card);
+            if(res>0)
+                return new HttpRes<string>(46, "绑定卡号成功", null);
+            else
+                return new HttpRes<string>(47, "无该用户信息，绑定卡号失败", null);
         }
     }
 }
