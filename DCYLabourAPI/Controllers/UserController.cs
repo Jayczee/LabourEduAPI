@@ -86,13 +86,13 @@ namespace DCYLabourAPI.Controllers
         }
 
         [HttpPost]
-        public HttpRes<string> AddClass([FromBody] ClassInf inf)
+        public HttpRes<int> AddClass([FromBody] ClassInf inf)
         {
             int res = ubll.AddClass(inf);
             if (res > 0)
-                return new HttpRes<string>(31, "添加班级信息成功", null);
+                return new HttpRes<int>(31, "添加班级信息成功", res);
             else
-                return new HttpRes<string>(32, "添加班级信息失败，班级信息已存在", null);
+                return new HttpRes<int>(32, "添加班级信息失败，班级信息已存在", 0);
         }
 
         [HttpPut]
@@ -158,7 +158,17 @@ namespace DCYLabourAPI.Controllers
             if(res>0)
                 return new HttpRes<string>(46, "绑定卡号成功", null);
             else
-                return new HttpRes<string>(47, "无该用户信息，绑定卡号失败", null);
+                return new HttpRes<string>(47, "无该用户信息，绑定卡号失败或该卡号已存在", null);
+        }
+
+        [HttpPut]
+        public HttpRes<string> UpdateTeacher([FromBody]Teacher inf)
+        {
+            int res = ubll.UpdateTeacher(inf);
+            if (res > 0)
+                return new HttpRes<string>(54, "更新教师信息成功", null);
+            else
+                return new HttpRes<string>(55,"更新信息失败，无该教师信息",null);
         }
     }
 }

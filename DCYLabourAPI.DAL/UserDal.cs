@@ -20,7 +20,7 @@ namespace DCYLabourAPI.DAL
 
         public bool CheckUser(string uid)
         {
-            DataTable dt = SqlHelper.ExecuteTable("select * from user where Uid=@para1",
+            DataTable dt = SqlHelper.ExecuteTable("select * from UserInf where Uid=@para1",
                 new SqlParameter("@para1",uid));
             if (dt.Rows.Count > 0)
                 return true;
@@ -39,7 +39,7 @@ namespace DCYLabourAPI.DAL
                 new SqlParameter("@para3", regInf.TBirth),
                 new SqlParameter("@para4", regInf.TPhoneNum),
                 new SqlParameter("@para5", regInf.TSex));
-            int id = int.Parse(SqlHelper.ExecuteScalar("select TeacherID from TeacherInf where uid=@para1",
+            int id = int.Parse(SqlHelper.ExecuteScalar("select TeacherID from TeacherInf where TUid=@para1",
                 new SqlParameter("@para1", regInf.Uid)).ToString());
             if (res > 0 && res2 > 0)
                 return id;
@@ -101,17 +101,42 @@ namespace DCYLabourAPI.DAL
                 new SqlParameter("@para2",inf.CName));
             if (dt.Rows.Count > 0)
                 return 0;
-            return SqlHelper.ExecuteNonQuery("insert into ClassInf(CNo,CName,CTUid)",
+            int res= SqlHelper.ExecuteNonQuery("insert into ClassInf(CNo,CName,CTUid)values(@para1,@para2,@para3)",
                 new SqlParameter("@para1",inf.CNo),
                 new SqlParameter("@para2",inf.CName),
                 new SqlParameter("@para3",inf.CTUid));
+            if (res > 0)
+                return int.Parse(SqlHelper.ExecuteScalar("select CID from ClassInf where CNo=@para1 and CName=@para2",
+                    new SqlParameter("@para1", inf.CNo),
+                    new SqlParameter("@para2", inf.CName)).ToString());
+            return 0;
         }
 
         public int UpdateCard(string uid, string card)
         {
+            object obj = SqlHelper.ExecuteScalar("select * from TeacherInf where TCardNum=@para1",
+                new SqlParameter("@para1",card));
+            if (obj == null)
+            {
+                obj= SqlHelper.ExecuteScalar("select * from Student where SCardNum=@para1",
+                new SqlParameter("@para1", card));
+                if (obj != null)
+                    return -1;
+            }else
+                return -1;
             return SqlHelper.ExecuteNonQuery("update TeacherInf set TCardNum=@para1 where TUid=@para2",
                 new SqlParameter("@para1",card),
                 new SqlParameter("@para2",uid)) ;
+        }
+
+        public int UpdateTeacher(Teacher inf)
+        {
+            return SqlHelper.ExecuteNonQuery("update TeacherInf set TName=@para1,TCardNum=@para2,TBirth=@para3,TPhoneNum=@para4,TSex=@para5 where TUid=@para5",
+                new SqlParameter("@para1",inf.Tname),
+                new SqlParameter("@para2",inf.TCardNum),
+                new SqlParameter("@para3",inf.TBirth),
+                new SqlParameter("@para4",inf.TPhoneNum),
+                new SqlParameter("@para5",inf.TUid));
         }
 
         public int ResetPwd(string uid)

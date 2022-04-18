@@ -8,6 +8,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(c => c.AddPolicy("any", p => p.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader()));
+builder.Services.Configure<IISServerOptions>(options =>{
+    options.MaxRequestBodySize = 1073741822;
+});
 
 var app = builder.Build();
 

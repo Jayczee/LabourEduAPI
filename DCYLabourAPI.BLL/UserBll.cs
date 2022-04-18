@@ -137,5 +137,10 @@ namespace DCYLabourAPI.BLL
         {
             return udal.UpdateCard(uid, card);
         }
+
+        public int UpdateTeacher(Teacher inf)
+        {
+            return udal.UpdateTeacher(inf);
+        }
     }   
 }
